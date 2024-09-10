@@ -12,10 +12,14 @@ int main () {
   for (int i = 0; i < size; i++) {
     std::cin >> arr[i];
   }
-  int max = *(arr);
+  int max;
   for (int i = 0; i < size; i++) {
     int  temp  = makeSum(arr, i, 1, size);
-    if (temp >max) max = temp;
+    if(i == 0) {
+      max = temp;
+      continue;
+    }
+    if (temp > max) max = temp;
   }
   std::cout << "The maximum sum is: " << max << std::endl;
 }

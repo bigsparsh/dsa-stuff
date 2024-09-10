@@ -11,13 +11,10 @@ int main () {
   std::cout << "Enter the number of units consumed: ";
   std::cin >> units;
 
-  if (units <= 100) {
-    charge = units * 0.6;
-  } else if (units <= 300) {
-    charge = 100 * 0.6 + (units - 100) * 0.8;
-  } else  {
-    charge = 100 * 0.6 + 200 * 0.8 + (units - 300) * 0.9;
-  }   
+  if (units <= 100)  charge = units * 0.6;
+  else if (units <= 300) charge = 100 * 0.6 + (units - 100) * 0.8;
+  else charge = 100 * 0.6 + 200 * 0.8 + (units - 300) * 0.9;
+
   if (charge > 300) {
     charge += 50;;
     charge += charge * 0.15;
