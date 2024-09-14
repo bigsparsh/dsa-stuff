@@ -2,85 +2,82 @@
 #include <stdlib.h>
 
 typedef struct node {
-  int exponent;
-  int constant;
+  int epo;
+  int cnst;
   struct node *next;
 } NODE;
 
-NODE* insert (NODE *, int);
-NODE* addPoly (NODE *, NODE *);
+NODE* addExp (NODE *, NODE *);
+NODE* insert (NODE *);
 void display (NODE *);
 
 int main () {
-  int choice, p1_size, p2_size;
-  NODE *p1_head = NULL;
-  NODE *p2_head = NULL;
+  int size1, size2;
+  NODE *head1 = NULL, *head2 = NULL, *tail1 = NULL, *tail2 = NULL, *head3;
 
-  printf("\nHow long should the first expression be: ");
-  scanf("%d", &p1_size);
+  printf ("Enter the size of first expression: ");
+  scanf("%d", &size1);
 
-  for (int i = 0; i < p1_size ; i++) p1_head = insert(p1_head);
-  
-  printf("\nHow long should the second expression be: ");
-  scanf("%d", &p1_size);
+  for (int i = 0; i < size1; i++) {
+    tail1 = insert (tail1);
+    if (head1 == NULL) head1 = tail1;
+  }
 
-  for (int i = 0; i < p2_size ; i++) p2_head = insert(p2_head);
+  printf ("Enter the size of second expression: ");
+  scanf("%d", &size2);
 
-  addPoly(p1_head, p2_head);
+  for (int i = 0; i < size2; i++) {
+    tail2 = insert (tail2);
+    if (head2 == NULL) head2 = tail2;
+  }
+
+  head3 = addExp (head1, head2);
+  display (head3);
 
   return 0;
+
 }
 
-NODE* addPoly (NODE *p1_head, NODE *p2_head) {
-  NODE *p1 = p1_head;
-  NODE *p2 = p2_head;
-  NODE *p3_head = NULL;
-
-  while (p1 != NULL) {
-    
-    while (p2 != NULL) {
-      if (p1->exponent == p2->exponent) {
-
-      }
-      p2 = p2->next;
-    }
-    p1 = p1->next;
-  }
-}
-
-NODE* insert (NODE *head, int size) {
-  NODE *h = head;
-  int count = 0;
-  while (h != NULL) {
-    h = h->next;
-    count++;
-  }
-  if (size <= count) {
-    printf("\bBro, you said the size was %d, now don't be a hypocrite and stop inserting.\n", size);
-    return head;
-  }
-  h = head;
+NODE* insert (NODE *tail) {
   NODE *newNode = (NODE *) malloc(sizeof(NODE));
-  printf("\nEnter the base for the node: ");
-  scanf("%d", &newNode->base);
   printf("\nEnter the constant for the node: ");
-  scanf("%d", &newNode->constant);
+  scanf("%d", &newNode->cnst);
+  printf("\nEnter the exponent for the node: ");
+  scanf("%d", &newNode->epo);
   newNode->next = NULL;
-  if (head != NULL) {
-    while (h->next != NULL) {
-      h = h->next;
+
+  if (tail != NULL) tail->next = newNode;
+  tail = newNode;
+
+  return tail;
+}
+
+NODE* addExp (NODE *head1, NODE *head2) {
+  NODE *head3 = NULL, *h2 = head2, *tail3 = NULL;
+  while (head1 != NULL) {
+    while (h2 != NULL) {
+      if (head1->epo == h2->epo) {
+        NODE *newNode = (NODE *) malloc(sizeof(NODE));
+        newNode->epo = head1->epo;
+        newNode->cnst = head1->epo + h2->epo;
+        newNode->next = NULL;
+        if (tail3 != NULL) tail3->next = newNode;
+        tail3 = newNode;
+        if (head3 == NULL) head3 == tail3;
+      }
+      h2 = h2->next;
     }
-    h->next = newNode;
-  } else {
-    h = newNode;
+    h2 = head2;
+    head1 = head1->next;
   }
-  return head;
+  return head3;
 }
 
 void display (NODE *head) {
-  printf("\nThe contents of this array is: \n");
+  printf("\nThe elements of the linked list are: ");
   while (head != NULL) {
-    printf(" [ %d ] ", head->data);
+    printf(" %d^%d ", head->cnst, head->epo);
     head = head->next;
   }
+  printf("\n");
 }
