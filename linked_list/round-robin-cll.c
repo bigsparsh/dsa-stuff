@@ -26,8 +26,8 @@ int main () {
     tail = insert (head, tail);
     if (head == NULL) head = tail;
   }
-  display(head);
 
+  display(head);
   execute_process (head, ttp);
 
 }
@@ -75,7 +75,7 @@ void execute_process (NODE *head, int ttp) {
 
 void display (NODE *head) {
   NODE *h = head;
-  printf("\nELements:\n");
+  printf("\nELements: ");
   do {
     printf(" [ P%d {%d} ] ", head->index, head->time);
     head = head->next;
