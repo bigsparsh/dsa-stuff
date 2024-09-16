@@ -34,13 +34,11 @@ int main () {
 
 NODE* insert (NODE *head, NODE *tail) {
   NODE *newNode = (NODE *) malloc(sizeof(NODE));
-  if (head != NULL) newNode->next = head;
-  else newNode->next = newNode;
 
-  printf("\nEnter the~ index of the process: ");
-  scanf("%d", &newNode->index);
+  newNode->next = (head == NULL) ? newNode : head;
+  newNode->index = (head == NULL) ? 1 : tail->index + 1;
 
-  printf("\nEnter the execution time for process: ");
+  printf("\nEnter the execution time for process %d: ", newNode->index);
   scanf("%d", &newNode->time);
 
   if (tail != NULL) tail->next = newNode;
@@ -52,12 +50,13 @@ NODE* insert (NODE *head, NODE *tail) {
 NODE* delete (NODE*head, int time) {
   NODE *h = head;
   if (head->next == head) {
-    printf("\nProcess P%d executed in %d time.\n", h->index, time);
+    printf("\nProcess P%d executed in %d time.\n", h->index, time + h->time);
+    free (h);
     return NULL;
   }
   while (head->next != h) head = head->next;
   head->next = h->next;
-  printf("\nProcess P%d executed in %d time.\n", h->index, time);
+  printf("\nProcess P%d executed in %d time.\n", h->index, time + h->time);
   free (h);
   return head->next;
 }
@@ -75,7 +74,7 @@ void execute_process (NODE *head, int ttp) {
 
 void display (NODE *head) {
   NODE *h = head;
-  printf("\nELements: ");
+  printf("\nElements: ");
   do {
     printf(" [ P%d {%d} ] ", head->index, head->time);
     head = head->next;
