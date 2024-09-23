@@ -16,6 +16,7 @@ class Car {
     void setProperties (std::string mk, std::string md, int y, double p, bool a) {
       make = mk;
       model = md;
+      year = y;
       price = p;
       availability = a;
     }
@@ -25,9 +26,10 @@ class Car {
     }
 
     void sellCar () {
-      if (availability)
+      if (availability) {
         availability = false;
         std::cout << "\nNow the car has been sold.";
+      }
       else 
         std::cout << "\nThe car has already been sold.";
     }
@@ -39,10 +41,15 @@ class Car {
       std::cout << "\nPrice: Rs. " << price;
       std::cout << "\nAvailability: " << availability ? "Yes" : "No";
     }
-}
+};
 
 int main () {
-  car c1, c2;
-  c1.setProperties ("Toyota", "Innova", 2023, 3056750, true);
-  c2.setProperties ("Audi", "A8", 2024, 50000000, true);
+  Car c1, c2;
+  c1.setProperties ("Toyota", "Innova", 2023, 45000, true);
+  c2.setProperties ("Audi", "A8", 2024, 4000, true);
+  c1.getDetails();
+  c1.sellCar();
+  c2.updatePrice(859999);
+  c2.getDetails();
+  return 0;
 }
