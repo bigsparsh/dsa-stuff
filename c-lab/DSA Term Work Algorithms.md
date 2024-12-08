@@ -1,6 +1,5 @@
 # 1- Write a menu driven program to reverse a single linked list in O(N) time with a non-recursive function.
 
-
 ```c
 NODE *reverse (NODE *head) {
   NODE *prev = NULL, *current = head, *next = NULL;
@@ -15,14 +14,15 @@ NODE *reverse (NODE *head) {
 ```
 
 ### Algorithm
+
 1. Start
 2. We get the head of the linked list as argument to the function (say head).
 3. Now we initialize three pointers of node type of the linked list and set one of them to the head and the rest to NULL. (say current = head, next = prev = NULL)
 4. Now iterate over following steps until the current pointer becomes null.
-	- Set the next to current's next.
-	- Set current's next to prev.
-	- Set prev to current.
-	- Set current to next.
+   - Set the next to current's next.
+   - Set current's next to prev.
+   - Set prev to current.
+   - Set current to next.
 5. After that return prev as the head of the reversed linked list.
 
 # 2- Write a menu driven program to delete duplicate name(if any) in the single Link list. The information field of each node should contain name and roll no of students.
@@ -47,15 +47,16 @@ NODE *deleteDuplicate (NODE *head, NODE **tail) {
 ```
 
 ### Algorithm
+
 1. Start
 2. We get the pointer pointing to the first node and double pointer pointing to the end of the linked list as arguments.
 3. We initialize two pointers of the linked list node type and set one of them to head and other to NULL. (say, current = head, temp = NULL)
 4. After that we iterate through following steps until the current becomes NULL.
-	- Set the temp equal to current.
-	- Now iterate through following steps until temp's next becomes NULL.
-		1) If the current's name and temp's next node's name are equal then create a temporary pointer and set it the the temp's next after that set the temp's next to the temp's next of the next node, and then finally free the temporary node. Also if the node next to temp is found to be NULL then then set the tail to be temp. Otherwise set temp to point to it's next node.
-	- Set current to point to it's next node.
-5.  Now return the head.
+   - Set the temp equal to current.
+   - Now iterate through following steps until temp's next becomes NULL.
+     1. If the current's name and temp's next node's name are equal then create a temporary pointer and set it the the temp's next after that set the temp's next to the temp's next of the next node, and then finally free the temporary node. Also if the node next to temp is found to be NULL then then set the tail to be temp. Otherwise set temp to point to it's next node.
+   - Set current to point to it's next node.
+5. Now return the head.
 6. Stop.
 
 # 3- Write a C program to find and delete the node with second minimum data in the single link list.
@@ -67,7 +68,7 @@ NODE *deleteSecondMin (NODE *head, NODE **tail) {
     free (head);
     return NULL;
   }
-  
+
   int min = head->data, secondMin = head->next->data;
   NODE *temp = head;
 
@@ -107,26 +108,29 @@ NODE *deleteSecondMin (NODE *head, NODE **tail) {
 ```
 
 ### Algorithm
+
 1. Start
 2. We get the pointer to the node containing the first node and double pointer to the node containing the last node in the linked list. (say head and tail)
 3. Now if head is NULL then return NULL because there is nothing to delete in that case.
 4. If head's next node is NULL then free the head and return NULL deleting the singular node.
 5. Now initialize two integer variables set one to head's data and other to the head next's data, also initialize a pointer of linked list node type to NULL. say (min, secondMin and temp)
 6. Iterate over the following steps until temp becomes NULL.
-	- If temp's data is less than min then set secondMin to min and set min to the temp's data .
-	- Otherwise if temp's data is less than secondMin and is not equal to min then set secondMin to temp's data.
-	- Now point the temp to it's next node.
+   - If temp's data is less than min then set secondMin to min and set min to the temp's data .
+   - Otherwise if temp's data is less than secondMin and is not equal to min then set secondMin to temp's data.
+   - Now point the temp to it's next node.
 7. Now if secondMin is equal to the head's data then save the head in a temp pointer then point head to it's next node, after that free the temp pointer.
 8. Otherwise iterate over the following steps
-	- If temp next node's data is equal to secondMin then make a linked list node pointer (say del) and save the temp's next node and then set temp's next to the next's next node and if del is equal to the tail then set the tail to temp, then at last free del. Then Break out of the loop
-	- Set temp to it's next node.
+   - If temp next node's data is equal to secondMin then make a linked list node pointer (say del) and save the temp's next node and then set temp's next to the next's next node and if del is equal to the tail then set the tail to temp, then at last free del. Then Break out of the loop
+   - Set temp to it's next node.
 9. Return head.
 10. Stop
 
-# 4- Write a C program to   create a single linked list, then find whether there exist any two nodes in the linked list whose multiplication is less than the target value. 
-#### Example: 
+# 4- Write a C program to create a single linked list, then find whether there exist any two nodes in the linked list whose multiplication is less than the target value.
+
+#### Example:
+
 Input:  Linked-List =  12->15->3->4->6, Target = 20
-Output: Yes 
+Output: Yes
 
 ```c
 int isProductLessThanTarget (NODE *head, int target) {
@@ -146,15 +150,16 @@ int isProductLessThanTarget (NODE *head, int target) {
 ```
 
 ### Algorithm
+
 1. Start
 2. We get the head as the pointer to the first node of the linked list and an integer which is the target. (say, head and target).
 3. Initialize a linked list node pointer pointing to the head. (say, current)
 4. Iterate over the following steps until current is NULL.
-	- Make a linked list node pointer pointing to the current's next node. (say, next)
-	- Now iterate over the following steps until next becomes NULL.
-		1) if current's data multiplied by next's next is less target then return 1 indicating that the target was met and in main function print "YES".
-		2) Set the next to it's next node.
-	- Set current to it's next node.
+   - Make a linked list node pointer pointing to the current's next node. (say, next)
+   - Now iterate over the following steps until next becomes NULL.
+     1. if current's data multiplied by next's next is less target then return 1 indicating that the target was met and in main function print "YES".
+     2. Set the next to it's next node.
+   - Set current to it's next node.
 5. Return 0 indicating that target was not met and in main function print "NO".
 6. Stop
 
@@ -179,24 +184,26 @@ void findIntersection (NODE *head1, NODE *head2) {
 ```
 
 ### Algorithm
+
 1. Start
 2. We get the pointers pointing to the first node of two linked list each. (say, head1, head2).
 3. We initialize two linked list node pointers with head1 and head2. (say, h1 and h2).
 4. The iterate until h1 becomes null and execute below sub steps in each iteration.
-	- Set h2 to head2.
-	- Iterate the following statements until h2 becomes null.
-		1) If h1's data is equal to h2's data then return as the intersection is found also print the intersection node's data.
-		2) Set h2 to point to it's next node.
-	- Set h1 to point to it's next node.
+   - Set h2 to head2.
+   - Iterate the following statements until h2 becomes null.
+     1. If h1's data is equal to h2's data then return as the intersection is found also print the intersection node's data.
+     2. Set h2 to point to it's next node.
+   - Set h1 to point to it's next node.
 5. If no intersection is found then print a statement stating that.
 6. Stop
 
-# 6-  W.A.P. to create a binary search tree and perform the following operations:
-1) Find a node with second highest data. 
-2) Delete a node from the tree.
-3) Count total number of nodes having common parent. 
-4) Find the height of a binary search tree
-5) Count total numbers of nodes from left hand side of the root node
+# 6- W.A.P. to create a binary search tree and perform the following operations:
+
+1. Find a node with second highest data.
+2. Delete a node from the tree.
+3. Count total number of nodes having common parent.
+4. Find the height of a binary search tree
+5. Count total numbers of nodes from left hand side of the root node
 
 ```c -1
 int findSecondHighest (NODE *root) {
@@ -214,12 +221,13 @@ int findSecondHighest (NODE *root) {
 ```
 
 ### 1) Algorithm
+
 1. Start
 2. We get the pointer pointing to the root of the BST as argument. (say, root).
 3. If root is NULL then return -1 indicating that the value was not found.
 4. Initialize a BST node pointer pointing to the root. (say, temp).
 5. Iterate over the following sub steps until the temp's right's right becomes NULL.
-	- Set the temp to point to it's next node.
+   - Set the temp to point to it's next node.
 6. Return temp's data
 7. Stop
 
@@ -258,15 +266,16 @@ NODE* deleteNode (NODE *root, int data) {
 ```
 
 ### 2) Algorithm
+
 1. Start
 2. We get the pointer pointing to the root node of the tree and an integer which is to be deleted. (say, root and data).
 3. If root is null then return it.
 4. If data is less than the root's data then set the root's left equal to the result of recursive call while passing in the root's left data and the data.
 5. Otherwise If data is greater than the root's data then set root's right equal to the result of recursive call while passing in the root's right node and the data.
 6. Otherwise if the data is equal to the root's data then check the following.
-	- If root's left node is found to be null then free the current root and return root's right.
-	- Otherwise if the root's right is found to be null then free the current root and return root's left.
-	- Now after that iterate until the leftmost node is found from the right of the current node then set the data of that right node to the data of the current root right's data then set the root's right to be the result of the recursive call where we pass in the root's right and it's data.
+   - If root's left node is found to be null then free the current root and return root's right.
+   - Otherwise if the root's right is found to be null then free the current root and return root's left.
+   - Now after that iterate until the leftmost node is found from the right of the current node then set the data of that right node to the data of the current root right's data then set the root's right to be the result of the recursive call where we pass in the root's right and it's data.
 7. Return the root node.
 8. Stop
 
@@ -285,6 +294,7 @@ int countCommonParent (NODE *root) {
 ```
 
 ### 3) Algorithm
+
 1. Start
 2. We get the pointer pointing to the root of the tree. (say, root).
 3. If root is null then we return 0.
@@ -306,6 +316,7 @@ int findHeight (NODE *root) {
 ```
 
 ### 4) Algorithm
+
 1. Start
 2. We get the pointer pointing to the root of the tree. (say, root).
 3. If the root is null then we return 0.
@@ -324,13 +335,14 @@ int countLeftNodes (NODE *root) {
 ```
 
 ### 5) Algorithm
+
 1. Start
 2. We get the pointer pointing to the root of the tree. (say, root).
 3. If the root is null then return 0.
 4. Otherwise return 1 added by the recursive call to the function while passing in the root's left node.
 5. Stop.
 
-# 7- Write a C program to sort N names given by user in an array, using Quick sort technique. 
+# 7- Write a C program to sort N names given by user in an array, using Quick sort technique.
 
 ```c
 void quickSort (char **names, int low, int high) {
@@ -363,19 +375,21 @@ int partition (char **names, int low, int high) {
 ```
 
 ### Algorithm for the Quick Sort function
+
 1. Start
 2. We get the names and low and high as arguments.
 3. if low is less than the high then execute the following steps.
-	- Call the partition function with the names, low and high passed as argument.
-	- Now do a binary recursive call where the first call takes in names, low and then the result of the above partition call - 1 while the second call takes the names, partition + 1 and high.
+   - Call the partition function with the names, low and high passed as argument.
+   - Now do a binary recursive call where the first call takes in names, low and then the result of the above partition call - 1 while the second call takes the names, partition + 1 and high.
 4. Stop
 
 ### Algorithm for the Partition function
+
 1. Start
 2. We get the names, low and high as the arguments.
 3. We initialize a pivot which is set to the high index of the names array, also initialize an integer with low - 1. (say pivot and i).
 4. Iterate over the following sub steps until a temporary value (initially 0) becomes less than high after incrementing it at each iteration. (say, j).
-	- If names j index is equal to the pivot then we increment i, the swap the names i with names j.
+   - If names j index is equal to the pivot then we increment i, the swap the names i with names j.
 5. Swap the names i+1 with names high
 6. Return i + 1.
 
@@ -403,14 +417,15 @@ void allocateTime (NODE *head, int n) {
 ```
 
 ### Algorithm
+
 1. Start
 2. We get the pointer pointing to the head of the linked list as the argument.
 3. Initialize an integer to keep track of the time and set it to 0. (say, count_time).
 4. If head is null then list is empty and stop.
 5. Otherwise initialize a temporary pointer of linked list node type and set it to the head.
-6. Execute following statements in iterative manner until temp becomes null. 
-	- Increment the count_time by 10.
-	- If temp's time is greater than 10 then decrement that time from the temp's time then set temp to it's next node, otherwise print process id and the time taken to execute this process, then delete that node.
+6. Execute following statements in iterative manner until temp becomes null.
+   - Increment the count_time by 10.
+   - If temp's time is greater than 10 then decrement that time from the temp's time then set temp to it's next node, otherwise print process id and the time taken to execute this process, then delete that node.
 7. Stop
 
 # 9- Write a C program to store the details of a weighted graph.
@@ -451,6 +466,7 @@ void create_edge (Vertex **head, int src, int dest, int weight) {
 ```
 
 ### Algorithm
+
 1. Stop
 2. We get the double pointer pointing to the first vertex of the graph, a source, a destination and weight. (say head, src, dest and weight)
 3. Get the source vertex by iterating over all the vertices of the graph, then do the same for the destination vertex.
@@ -481,12 +497,13 @@ void dfs (Vertex *head) {
 ```
 
 ### Algorithm
-1) Start
-2) We get the pointer that points to the starting node of the graph as argument. (say, head).
-3) If head is null then return.
-4) Otherwise set the head visited to 1 then print the head's data.
-5) Then iterate over the edges of head and if their destination is visited then call the function recursively while passing in the destination.
-6) Stop
+
+1. Start
+2. We get the pointer that points to the starting node of the graph as argument. (say, head).
+3. If head is null then return.
+4. Otherwise set the head visited to 1 then print the head's data.
+5. Then iterate over the edges of head and if their destination is visited then call the function recursively while passing in the destination.
+6. Stop
 
 ```c
 
