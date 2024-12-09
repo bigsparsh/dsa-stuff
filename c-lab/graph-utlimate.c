@@ -72,16 +72,17 @@ void bfs (Graph *grp, int src, int *visited) {
   int front = 0, rear = 0;
   queue[rear++] = src;
   visited[src] = 1;
-  Node *curr_node;
+  Node *curr_node = NULL;
+
   while (front < rear) {
-    src = queue[front];
+    src = queue[front++];
     printf(" %d ->", src);
-    front++;
+
     curr_node = grp->adj_list[src];
-    while (curr_node) {
-      if (!visited[curr_node->vertex]) {
-        queue[rear] = curr_node->vertex;
-        rear++;
+
+    while (curr_node != NULL) {
+      if (visited[curr_node->vertex] == 0) {
+        queue[rear++] = curr_node->vertex;
         visited[curr_node->vertex] = 1;
       }
       curr_node = curr_node->next;

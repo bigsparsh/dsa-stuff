@@ -113,22 +113,13 @@ void display (NODE *root) {
 }
 
 int findSecondHighest (NODE *root) {
-    if (root == NULL) {
-        return -1;
-    }
-
-    NODE *temp = root;
-    while (temp->right->right != NULL) {
-        temp = temp->right;
-    }
-
-    return temp->data;
+    if (root == NULL) return -1;
+    while (root->right->right != NULL) root = root->right;
+    return root->data;
 }
 
 NODE * deleteNode (NODE *root, int data) {
-  if (root == NULL) {
-    return NULL;
-  }
+  if (root == NULL) return NULL;
 
   if (data < root->data) {
     root->left = deleteNode(root->left, data);
@@ -156,21 +147,16 @@ NODE * deleteNode (NODE *root, int data) {
 }
 
 int countCommonParent (NODE *root) {
-  if (root == NULL) {
-    return 0;
-  }
+  if (root == NULL) return 0;
 
-  if (root->left != NULL && root->right != NULL) {
+  if (root->left != NULL && root->right != NULL) 
     return 1 + countCommonParent(root->left) + countCommonParent(root->right);
-  }
 
   return countCommonParent(root->left) + countCommonParent(root->right);
 }
 
 int findHeight (NODE *root) {
-  if (root == NULL) {
-    return 0;
-  }
+  if (root == NULL) return 0;
 
   int leftHeight = findHeight(root->left);
   int rightHeight = findHeight(root->right);
@@ -179,10 +165,7 @@ int findHeight (NODE *root) {
 }
 
 int countLeftNodes (NODE *root) {
-  if (root == NULL) {
-    return 0;
-  }
-
+  if (root == NULL) return 0;
   return 1 + countLeftNodes(root->left);
 }
 
