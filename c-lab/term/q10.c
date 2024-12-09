@@ -3,7 +3,7 @@
  University Roll No: 2024329
  Section: C
   
-  Q9- Write a C program to store the details of a weighted graph.
+  Q10- Write a C program to implement DFS and BFS.
 */
 
 #include <stdio.h>
@@ -21,13 +21,19 @@ typedef struct Vertex {
   int data;
   struct Edge *edge;
   struct Vertex *next;
+  int visited;
 } Vertex;
 
+// Function prototypes
 void create_edge (Vertex **, int, int, int);
 void create_vertex (Vertex **, int);
 void display_graph (Vertex *);
+void dfs (Vertex *);
+void bfs (Vertex *);
+void visitReset (Vertex *);
 
 int main () {
+  // Head pointer
   Vertex *head = NULL;
   int choice;
   int vertex, edge, weight;
@@ -37,7 +43,9 @@ int main () {
     printf("1. Create Vertex\n");
     printf("2. Create Edge\n");
     printf("3. Display Graph\n");
-    printf("4. Exit\n");
+    printf("4. DFS\n");
+    printf("5. BFS\n");
+    printf("6. Exit\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
 
@@ -54,16 +62,24 @@ int main () {
         scanf("%d", &vertex);
         printf("Enter the destination: ");
         scanf("%d", &edge);
-        printf("Enter the weight: ");
-        scanf("%d", &weight);
-        create_edge(&head, vertex, edge, weight);
+        create_edge(&head, vertex, edge, 0);
         break;
       case 3:
         // Display the graph
         display_graph(head);
         break;
       case 4:
-        // Exit the program
+        // DFS
+        visitReset(head);
+        dfs(head);
+        break;
+      case 5:
+        // BFS
+        visitReset(head);
+        bfs(head);
+        break;
+      case 6:
+        // Exit
         return 0;
       default:
         printf("Invalid choice\n");
@@ -73,12 +89,74 @@ int main () {
   return 0;
 }
 
-// Create an edge
+// Function to perform depth first search
+void dfs (Vertex *head) {
+  // Base case
+  if (head == NULL) {
+    return;
+  }
+
+  // Recursive case
+  head->visited = 1;
+  printf("%d ", head->data);
+
+  // Traverse the edges of the vertex and call dfs on the destination vertex
+  Edge *edge = head->edge;
+  while (edge != NULL) {
+    if (edge->dest->visited == 0) {
+      dfs(edge->dest);
+    }
+    edge = edge->next;
+  }
+}
+
+// Function to perform breadth first search
+void bfs (Vertex *head) {
+  // Base case
+  if (head == NULL) {
+    return;
+  }
+
+  // Queue to store the vertices
+  Vertex *queue[100];
+  int front = 0;
+  int rear = 0;
+
+  // Add the head vertex to the queue
+  queue[rear++] = head;
+  head->visited = 1;
+
+  // Traverse the vertices in the queue and add the destination vertices to the queue
+  while (front < rear) {
+    Vertex *vertex = queue[front++];
+    printf("%d ", vertex->data);
+
+    Edge *edge = vertex->edge;
+    while (edge != NULL) {
+      if (edge->dest->visited == 0) {
+        queue[rear++] = edge->dest;
+        edge->dest->visited = 1;
+      }
+      edge = edge->next;
+    }
+  }
+}
+
+// Function to reset the visited flag of all the vertices
+void visitReset (Vertex *head) {
+  // Reset the visited flag of all the vertices
+  while (head != NULL) {
+    head->visited = 0;
+    head = head->next;
+  }
+}
+
+// Function to create an edge between two vertices
 void create_edge (Vertex **head, int src, int dest, int weight) {
   Vertex *src_vertex = *head;
   Vertex *dest_vertex = *head;
 
-  // Find the source and destination vertex
+  // Find the source and destination vertices
   while (src_vertex != NULL && src_vertex->data != src) {
     src_vertex = src_vertex->next;
   }
@@ -86,38 +164,35 @@ void create_edge (Vertex **head, int src, int dest, int weight) {
     dest_vertex = dest_vertex->next;
   }
 
-  // If source or destination vertex is not found
+  // Check if the source and destination vertices are valid
   if (src_vertex == NULL || dest_vertex == NULL) {
     printf("Invalid source or destination vertex\n");
     return;
   }
 
-  // Create a new edge
+  // Create an edge between the source and destination vertices
   Edge *new_edge = (Edge *) malloc(sizeof(Edge));
   new_edge->weight = weight;
   new_edge->dest = dest_vertex;
   new_edge->next = NULL;
 
-  // If the source vertex has no edge then add the new edge else add the new edge at the end of the edge list
   if (src_vertex->edge == NULL) {
     src_vertex->edge = new_edge;
   } else {
-    Edge *temp = src_vertex->edge;
-    while (temp->next != NULL) {
-      temp = temp->next;
-    }
-    temp->next = new_edge;
+    new_edge->next = src_vertex->edge;
+    src_vertex->edge = new_edge;
   }
 }
 
-// Create a vertex
+// Function to create a vertex
 void create_vertex (Vertex **head, int data) {
   Vertex *new_vertex = (Vertex *) malloc(sizeof(Vertex));
   new_vertex->data = data;
   new_vertex->edge = NULL;
   new_vertex->next = NULL;
+  new_vertex->visited = 0;
 
-  // If the graph is empty then add the new vertex else add the new vertex at the end of the vertex list
+  // Add the vertex to the graph
   if (*head == NULL) {
     *head = new_vertex;
   } else {
@@ -129,20 +204,21 @@ void create_vertex (Vertex **head, int data) {
   }
 }
 
-// Display the graph
+// Function to display the graph
 void display_graph (Vertex *head) {
   Vertex *temp = head;
   Edge *edge_temp;
 
-  // Print the graph
+  // Traverse the vertices and display the edges
   while (temp != NULL) {
     printf("%d -> ", temp->data);
     edge_temp = temp->edge;
     while (edge_temp != NULL) {
-      printf("%d(%d) ", edge_temp->dest->data, edge_temp->weight);
+      printf("%d ", edge_temp->dest->data);
       edge_temp = edge_temp->next;
     }
     printf("\n");
     temp = temp->next;
   }
 }
+
