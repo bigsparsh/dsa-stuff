@@ -9,20 +9,23 @@ typedef struct node {
 typedef struct graph {
   int vtx_count;
   Node **adj_list;
+  int is_directed;
 } Graph;
 
 Node* create_node (int);
-Graph* create_graph (int);
+Graph* create_graph (int, int);
 void create_edge (Graph *, int, int);
 void display (Graph *);
 void dfs (Graph *, int, int *);
 void bfs (Graph *, int, int *);
 
 int main () {
-  int vtx, *visited = NULL;
+  int vtx, *visited = NULL, directed;
   printf ("How many vertices would you like?: ");
   scanf("%d", &vtx);
-  Graph *graph = create_graph(vtx); 
+  printf("Is this graph directed ?: ");
+  scanf("%d", &directed);
+  Graph *graph = create_graph(vtx, directed); 
 
   int choice, src, dest;
   do {
@@ -103,6 +106,13 @@ void create_edge (Graph *grp, int src, int dest) {
   Node *newNode = create_node (dest);
   newNode->next = grp->adj_list[src];
   grp->adj_list[src] = newNode;
+
+  if (!grp->is_directed) {
+    newNode = create_node (src);
+    newNode->next = grp->adj_list[dest];
+    grp->adj_list[dest] = newNode;
+  }
+
 }
 
 void display (Graph *grp) {
@@ -123,10 +133,11 @@ Node* create_node (int data) {
   return newNode;
 }
 
-Graph* create_graph (int vtx_count) {
+Graph* create_graph (int vtx_count, int directed) {
   Graph *graph = (Graph *) malloc(sizeof(Graph)); 
   graph->vtx_count = vtx_count;
   graph->adj_list = (Node **) malloc(vtx_count * sizeof(Node *));
+  graph->is_directed = directed;
 
   for (int i = 0; i < vtx_count; i++)
     graph->adj_list[i] = NULL;
