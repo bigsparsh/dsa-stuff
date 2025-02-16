@@ -1,13 +1,9 @@
+#include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 int main (){
-  int *x = (int*) malloc(sizeof(int));
-  x[0] = 10;
-
-  for (int i = 0; i < sizeof(x); i++) {
-    printf(" %d ", x[i]);
-  }
-
-  return 0;
+  int x = 100;
+  double y = 100.0;
+  float z = 12.12;
+  printf("%lf\n", sqrt(y));
 }
