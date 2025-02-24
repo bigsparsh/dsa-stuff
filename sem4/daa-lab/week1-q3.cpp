@@ -16,23 +16,33 @@ using namespace std;
 int jump_search(vector<int> list, int key) {
   int comparisons = 0;
   int n = list.size();
-  int jump = sqrt(n);
-  int left = 0;
-  int right = jump;
-  while (right < n && list[right] <= key) {
+  int step = sqrt(n);
+  int prev = 0;
+
+  while (list[min(step, n) - 1] < key) {
     comparisons++;
-    left = right;
-    right += jump;
-    if (right > n - 1)
-      right = n;
-  }
-  for (int i = left; i < right; i++) {
-    comparisons++;
-    if (list[i] == key) {
-      cout << "Present ";
+    prev = step;
+    step += sqrt(n);
+    if (prev >= n) {
+      cout << "Not Present ";
       return comparisons;
     }
   }
+
+  while (list[prev] < key) {
+    comparisons++;
+    prev++;
+    if (prev == min(step, n)) {
+      cout << "Not Present ";
+      return comparisons;
+    }
+  }
+
+  if (list[prev] == key) {
+    cout << "Present ";
+    return comparisons;
+  }
+
   cout << "Not Present ";
   return comparisons;
 }

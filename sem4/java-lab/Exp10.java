@@ -1,68 +1,72 @@
+// Q4. Objective:
+//     • Accept Principal Amount, Rate of Interest, and Time Period as
+//     command-line arguments. • Calculate Simple Interest and Total Amount.
+// Scenario:
+// A bank needs a program where customers can enter:
+// customer name
+// Customer id
+// Principal Amount
+// Rate of Interest (per annum, in %)
+// Time Period (in years)
+// The system calculates:
+// ✅ Simple Interest
+// ✅ Total Amount (Principal + Interest)
+
 import java.util.Scanner;
 
 class Exp10 {
 
-  String name;
-  int id;
-  double principalAmount;
-  double rateOfInterest;
-  double timePeriod;
+  String name, id;
+  double principal, rate, time, si, total;
 
-  Exp10 (int i, String n, double p, double r, double t) {
-    id = i;
-    name = n;
-    principalAmount = p;
-    rateOfInterest = r;
-    timePeriod = t;
+  void getDetails() {
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter name: ");
+    name = sc.next();
+    System.out.print("Enter id: ");
+    id = sc.next();
+    System.out.print("Enter principal amount: ");
+    principal = sc.nextDouble();
+    System.out.print("Enter rate of interest: ");
+    rate = sc.nextDouble();
+    System.out.print("Enter time period: ");
+    time = sc.nextDouble();
   }
 
-  double simpleInterest() {
-    return (principalAmount * rateOfInterest * timePeriod) / 100;
+  void calculate() {
+    si = (principal * rate * time) / 100;
+    total = principal + si;
   }
 
-  double totalAmount() {
-    return principalAmount + simpleInterest();
+  void display() {
+    System.out.println("Name: " + name);
+    System.out.println("ID: " + id);
+    System.out.println("Principal amount: " + principal);
+    System.out.println("Rate of interest: " + rate);
+    System.out.println("Time period: " + time);
+    System.out.println("Simple interest: " + si);
+    System.out.println("Total amount: " + total);
   }
 
   public static void main(String args[]) {
 
-    Exp10 obj = null;
     Scanner sc = new Scanner(System.in);
-    int choice;
 
-    do {
-      System.out.println("1. Enter customer details");
-      System.out.println("2. Calculate simple interest and total amount");
-      System.out.println("3. Exit");
-      System.out.print("Enter your choice: ");
-      choice = sc.nextInt();
+    int n;
 
-      switch (choice) {
-        case 1:
-          System.out.print("Enter customer id: ");
-          int id = sc.nextInt();
-          System.out.print("Enter customer name: ");
-          String name = sc.next();
-          System.out.print("Enter principal amount: ");
-          double principalAmount = sc.nextDouble();
-          System.out.print("Enter rate of interest: ");
-          double rateOfInterest = sc.nextDouble();
-          System.out.print("Enter time period: ");
-          double timePeriod = sc.nextDouble();
-          obj = new Exp10(id, name, principalAmount, rateOfInterest, timePeriod);
-          break;
-        case 2:
-          System.out.println("Simple interest: " + obj.simpleInterest());
-          System.out.println("Total amount: " + obj.totalAmount());
-          break;
-        case 3:
-          break;
-        default:
-          System.out.println("Invalid choice");
-      }
-    } while (choice != 3);
+    System.out.print("Enter number of customers: ");
+    n = sc.nextInt();
 
-    sc.close();
+    Exp10 obj[] = new Exp10[n];
 
+    for (int i = 0; i < n; i++) {
+      obj[i] = new Exp10();
+      obj[i].getDetails();
+      obj[i].calculate();
+    }
+
+    for (int i = 0; i < n; i++) {
+      obj[i].display();
+    }
   }
 }

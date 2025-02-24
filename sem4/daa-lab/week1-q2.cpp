@@ -13,7 +13,7 @@ int binary_search(vector<int> list, int key) {
   int right = list.size() - 1;
   while (left <= right) {
     comparisons++;
-    int mid = left + right / 2;
+    int mid = left + (right - left) / 2;
     if (list[mid] == key) {
       cout << "Present ";
       return comparisons;
