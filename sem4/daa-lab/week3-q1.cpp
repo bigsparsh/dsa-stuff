@@ -21,8 +21,7 @@ int main() {
 
   for (int x = 0; x < tc; x++) {
 
-    for (int x = 0; x < tc; x++)
-      cin >> size;
+    cin >> size;
 
     int *arr = new int[size];
 
