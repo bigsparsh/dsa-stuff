@@ -40,9 +40,7 @@ int main() {
     int i = 0, j = i + 1;
     while (j < size) {
       if (arr[j] - arr[i] == key) {
-        count++;
-        i++;
-        j++;
+        count++, i++, j++;
       } else if (arr[j] - arr[i] > key)
         i++;
       else

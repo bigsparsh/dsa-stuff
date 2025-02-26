@@ -19,33 +19,37 @@ int main() {
   int tc, size, temp;
   cin >> tc;
 
-  for (int x = 0; x < tc; x++)
-    cin >> size;
+  for (int x = 0; x < tc; x++) {
 
-  int *arr = new int[size];
+    for (int x = 0; x < tc; x++)
+      cin >> size;
 
-  for (int i = 0; i < size; i++)
-    cin >> arr[i];
+    int *arr = new int[size];
 
-  int comp = 0, shifts = 0;
+    for (int i = 0; i < size; i++)
+      cin >> arr[i];
 
-  for (int i = 1; i < size; i++) {
-    temp = arr[i];
-    int j = i - 1;
+    int comp = 0, shifts = 0;
 
-    while (j >= 0 && arr[j] > temp) {
-      arr[j + 1] = arr[j];
-      j--;
-      comp++;
+    for (int i = 1; i < size; i++) {
+      temp = arr[i];
+      int j = i - 1;
+
+      while (j >= 0 && arr[j] > temp) {
+        arr[j + 1] = arr[j];
+        j--;
+        comp++;
+        shifts++;
+      }
+
+      arr[j + 1] = temp;
       shifts++;
     }
 
-    arr[j + 1] = temp;
-    shifts++;
+    for (int i = 0; i < size; i++)
+      cout << arr[i] << " ";
+
+    cout << endl << comp << endl;
+    cout << shifts << endl;
   }
-
-  for (int i = 0; i < size; i++)
-    cout << arr[i] << " ";
-
-  cout << endl;
 }
