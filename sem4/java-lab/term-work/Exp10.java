@@ -27,7 +27,6 @@
 // bank accounts.
 // create the program as loop based menu driven program.
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 class Bank {
