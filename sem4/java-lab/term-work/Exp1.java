@@ -14,19 +14,11 @@
 
 import java.util.Scanner;
 
-public class Exp1 {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Enter name: ");
-    String name = sc.next();
-    System.out.println("Enter course: ");
-    String course = sc.next();
-    System.out.println("Enter university roll number: ");
-    int universityRollNo = sc.nextInt();
-    System.out.println("Enter semester: ");
-    int semester = sc.nextInt();
-    System.out.println("Name: " + name +
-                       "\nUniversity Roll No: " + universityRollNo +
-                       "\nCourse: " + course + "\nSemester: " + semester);
+class Exp1 {
+  public static void main (String args[]) {
+    System.out.println("Name: " + args[0]);
+    System.out.println("University Roll No: " + args[1]);
+    System.out.println("Course: " + args[2]);
+    System.out.println("Semester: " + args[3]);
   }
 }
